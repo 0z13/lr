@@ -30,6 +30,7 @@ fn main () {
     // lets fizzbuzz like it's 2010
     //
 
+    /*
     for i in 1..100 {
         match (i % 3==0, i%5==0) {
         (true, true) => println!("FizzBuzz"),
@@ -38,11 +39,65 @@ fn main () {
         (_, _) => println!("{}", i),
         }
     }
+    */
 
+    let x = Num {
+        value: 500,
+        personality: "radiant".into(),
+    };
 
+    // traits = typeclasses
+    // impl = instance
+    println!("{}", x.is_strictly_positive());
 
+   // enum with parametric polymorphism 
+
+    enum Sometin<T> {
+        SomeTin(T),
+        Notin,
+    }
+
+    enum Either <L,R> {
+        Right(L),
+        Left(R)
+    }
+
+    // lambdas 
+    // one level ://
+    let closure = | x: i32 | -> i32 { x + 5 } ;
+
+    println!("{}", closure(3));
+    
+
+    enum L<A> {
+        Nil,
+        Cons(A, Box<L<A>>),
+    }
+
+    fn len<A>(xs: L<A>, res: i32) -> i32 {
+        match xs {
+            Nil => res,
+            Cons(a, l) => 3 // zzz
+        }
+    }
 }
 
+
+struct Num { 
+    value: i32,
+    personality: String,
+}
+
+
+trait Signed {
+    fn is_strictly_positive(self) -> bool;
+}
+
+impl Signed for Num {
+    fn is_strictly_positive(self) -> bool {
+        self.value > 0 
+    }
+}
 
 // What is references
 // lmao
